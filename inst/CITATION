@@ -1,0 +1,9 @@
+year <- 2013
+vers <- paste("R package version 0.99.0")
+citEntry(entry="Manual",
+         title = "seqCNA",
+         author = personList(as.person("David Mosen-Ansorena")),
+         year = year,
+         note = vers,
+         textVersion =
+         paste("David Mosen-Ansorena (",year, "). seqCNA. ", vers, ".", sep=""))

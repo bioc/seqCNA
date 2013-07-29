@@ -1,0 +1,2 @@
+useDynLib(seqCNA)
+exportPattern("^[[:alpha:]]+")
