@@ -1,8 +1,8 @@
 Package: seqCNA
 Type: Package
 Title: Copy number analysis of high-throughput sequencing cancer data
-Version: 0.99.7
-Date: 2013-07-15
+Version: 1.0.0
+Date: 2013-08-03
 Author: David Mosen-Ansorena
 Maintainer: David Mosen-Ansorena <dmosen.gn@cicbiogune.es>
 Import: GLAD, doSNOW, adehabitatLT, seqCNA.annot
