@@ -400,7 +400,7 @@ applyFilters = function(rco, pem.filter=0, trim.filter=0, mapp.filter=0, mapq.fi
 	rco
 }
 
-runSeqnorm = function(rco, norm.win=NULL, method="quadratic", nproc=2, plots=TRUE, folder=NULL) {
+runSeqnorm = function(rco, norm.win=NULL, method="quadratic", lambdabreak=8, minSeg=7, maxSeg=35, nproc=2, plots=TRUE, folder=NULL) {
 	if (length(rco@tumour) == 0) stop("Run readSeqsumm first!")
 	if (length(rco@y) == 0) stop("Run applyFilters first!")
 	if (length(rco@x) == 0) stop("Run applyFilters first!")
@@ -415,9 +415,10 @@ runSeqnorm = function(rco, norm.win=NULL, method="quadratic", nproc=2, plots=TRU
 			norm.win = rco@win
 		}
 	}
-	rcount.prof = .seqnorm(rco@x, rco@y, chr=rco@seq, skip=rco@skip, use.normal=length(rco@normal)!=0,
-			resolution=rco@win/norm.win, nproc=nproc,method=method, 
-			out.dir=folder, out.jpg=file.path(folder,"seqCNA_normalization.jpg"), plots=plots)
+	rcount.prof = seqnormX(rco@x, rco@y, chr=rco@seq, skip=rco@skip, use.normal=length(rco@normal)!=0,
+			resolution=rco@win/norm.win, nproc=nproc,method=method, out.dir=folder, 
+			out.jpg=file.path(folder,"seqCNA_normalization.jpg"), plots=plots,
+			lambdabreak=lambdabreak, minRegions=minSeg, maxRegions=maxSeg)
 	profiles = cbind(rco@seq, (rco@pos-1)*rco@win, round(rcount.prof,4))
 	colnames(profiles) = c("chrom", "win.start", "normalized")
 	rco@output = data.frame(profiles)
@@ -527,7 +528,8 @@ plotCNProfile = function(rco, folder=NULL) {
 ### paired normal modes, with different regression strategies
 ##################################################################
 .seqnorm = function(x,y, nproc=1, resolution=1, use.normal=FALSE, skip=NULL, chr=rep(1,length(x)), 
-		method=c("loess","cubic","quadratic")[3], out.dir=getwd(), out.jpg, plots=TRUE) {
+		method=c("loess","cubic","quadratic")[3], out.dir=getwd(), out.jpg, plots=TRUE,
+		lambdabreak=8, minRegions=7, maxRegions=35) {
 	if (length(x) != length(y)) {
 		if (! use.normal)
 			stop("Tumour sample and GC content lengths differ.")
@@ -653,10 +655,20 @@ plotCNProfile = function(rco, folder=NULL) {
 	message("Fitting regression models...")
 	flush.console()
 	if (resolution < 1) sel = seq(1,length(x.full),l=100000)
+	xminwh = which.min(x)
+	xmin = x[xminwh]
+	ymin = y[xminwh]
+	xmaxwh = which.max(x)
+	xmax = x[xmaxwh]
+	ymax = y[xmaxwh]
 	fit = foreach(i=c(1:(length(breaks)-1))[segmLm], .export=c(".makeFormula")) %dopar% {
 		rang = breaks[i]:(breaks[i+1]-1)
 		xLm = x[rang]
 		yLm = y[rang]
+		if (reg.method=="loess") {
+			xLm = c(xLm, xmin,xmax)
+			yLm = c(yLm, ymin,ymax)
+		}
 		lomo = eval(call(reg.method, .makeFormula("xLm","yLm",method,use.normal,environment())))
 		if (resolution < 1) p = x.full[sel]
 		else p = x

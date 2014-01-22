@@ -7,7 +7,7 @@ This function calls seqnorm, which normalizes the tumoural profile with respect 
 The seqnorm method performs several regressions on homogeneous regions of the tumoural genomic profile.
 }
 \usage{
-runSeqnorm(rco, norm.win = NULL, method = "quadratic", nproc = 2, plots = TRUE, folder = NULL)
+runSeqnorm(rco, norm.win = NULL, method = "quadratic", lambdabreak=8, minSeg=7, maxSeg=35, nproc = 2, plots = TRUE, folder = NULL)
 }
 \arguments{
   \item{rco}{
@@ -22,6 +22,15 @@ For efficiency, we recommend to use the same value as the summarization window s
   \item{method}{
 A string being \code{"loess"}, \code{"cubic"} or \code{"quadratic"}, indicating which form of regression to use in the normalization.
 LOESS is more sensitive to noise and slower than the other two, which apply polynomial regression. In principle, we recommend using a quadratic polynomial regression, but there might be ocassions in which the others yield better fits.
+}
+  \item{lambdabreak}{
+The lambda prime parameter in GLAD, indicating the penalty term used during the optimization of the number of breakpoints.
+}
+  \item{minSeg}{
+The minimum number of segments in which the second pass regression is based. Too few would result in noisy estimates of the regression curve. We recommend to leave it to the default.
+}
+  \item{maxSeg}{
+The minimum number of segments in which the second pass regression is based. Too many would include segments whose regression curve does not approximate the overall curve. Additionally, they would add additional execution time. We recommend to leave it to the default.
 }
   \item{nproc}{
 A value indicating how many processing cores to use in the segmentation prior to regression and in the segment regressions. 
