@@ -415,7 +415,7 @@ runSeqnorm = function(rco, norm.win=NULL, method="quadratic", lambdabreak=8, min
 			norm.win = rco@win
 		}
 	}
-	rcount.prof = seqnormX(rco@x, rco@y, chr=rco@seq, skip=rco@skip, use.normal=length(rco@normal)!=0,
+	rcount.prof = .seqnorm(rco@x, rco@y, chr=rco@seq, skip=rco@skip, use.normal=length(rco@normal)!=0,
 			resolution=rco@win/norm.win, nproc=nproc,method=method, out.dir=folder, 
 			out.jpg=file.path(folder,"seqCNA_normalization.jpg"), plots=plots,
 			lambdabreak=lambdabreak, minRegions=minSeg, maxRegions=maxSeg)

@@ -12,8 +12,8 @@ Fast summarization, extensive filtering and improved normalization
 \tabular{ll}{
 Package: \tab seqCNA\cr
 Type: \tab Package\cr
-Version: \tab 1.3.3\cr
-Date: \tab 2014-01-22\cr
+Version: \tab 1.3.4\cr
+Date: \tab 2014-01-31\cr
 License: \tab GPL-3\cr
 }
 applyFilters applyThresholds plotCNProfile readSeqsumm runGLAD runSeqnorm runSeqsumm writeCNProfile
