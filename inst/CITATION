@@ -1,9 +1,11 @@
-year <- 2013
-vers <- paste("R package version 0.99.0")
-citEntry(entry="Manual",
-         title = "seqCNA",
-         author = personList(as.person("David Mosen-Ansorena")),
-         year = year,
-         note = vers,
-         textVersion =
-         paste("David Mosen-Ansorena (",year, "). seqCNA. ", vers, ".", sep=""))
+citEntry(entry = "Article", 
+    author = personList(as.person("David Mosen-Ansorena"), as.person("Naiara Telleria"), 
+						as.person("Silvia Veganzones"), as.person("Virginia De la Orden"), 
+						as.person("Maria Luisa Maestro"), as.person("Ana M Aransay")), 
+	title = "seqCNA: an R package for DNA copy number analysis in cancer using high-throughput sequencing", 
+	journal = "BMC Genomics", year = 2014, 
+    volume = 15, number = 1, pages = "178", 
+    url = "http://www.biomedcentral.com/1471-2164/15/178",
+	textVersion = "Mosén-Ansorena, D., Telleria, N., Veganzones, S., De la Orden, V., Maestro, M.L., & Aransay, A.M. (2014). seqCNA: an R package for DNA copy number analysis in cancer using high-throughput sequencing. BMC Genomics, 15, 178."
+)
+	
