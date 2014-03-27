@@ -19,7 +19,7 @@ Path to the folder where the table with the output from the \code{\link{SeqCNAIn
 }
 }
 \value{
-Nothing is returned from this function. Check the \code{folder} folder for a text file called \code{seqnorm_out.txt}.
+Nothing is returned from this function. Check the \code{folder} folder for a text file called \code{seqCNA_out.txt}.
 }
 \author{
 David Mosen-Ansorena
