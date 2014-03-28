@@ -622,8 +622,6 @@ plotCNProfile = function(rco, folder=NULL) {
 	maxRange = 0.85 # maximum span over Y of a segment's middle 90% quantile (in quantiles)
 	minLength = 0.85 # minimum segment length
 	stepp = 0.025
-	minRegions = 7
-	maxRegions = 35
 	.getSegmLm = function() {
 		segmLm = intersect(which(segmLength>quantile(segmLength,minLength)), which(segmRange<quantile(segmRange,maxRange)))
 		intersect(segmLm, which(segmDomain>quantile(segmDomain,minDomain)))

@@ -138,7 +138,8 @@ int seqsumm(int* winv, std::string cmd, std::string outf) {
 	else
 		myfile << "\t" << "counts";
 	myfile << "\n";
-	for (int ch=0;ch<chr_num;ch++)
+	for (int ch=0;ch<chr_num;ch++) {
+		if ( ! (maxindex[ch] == 0 && gc_mean[ch][0] == 0 && mapq_mean[ch][0] == 0))
 		for (unsigned int w=0;w<=maxindex[ch];w++) {
 			myfile << chr_str[ch] << "\t" << w*win << "\t" << gc_mean[ch][w] << "\t" << mapq_mean[ch][w];
 			if (is_paired == 1)
@@ -148,6 +149,7 @@ int seqsumm(int* winv, std::string cmd, std::string outf) {
 				myfile << "\t" << counts[ch][0][w];
 			myfile << "\n";
 		}
+	}
 	myfile.close();
 	Rprintf("\nDone!\n");
 	
