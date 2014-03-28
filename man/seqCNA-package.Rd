@@ -12,7 +12,7 @@ Fast summarization, extensive filtering and improved normalization
 \tabular{ll}{
 Package: \tab seqCNA\cr
 Type: \tab Package\cr
-Version: \tab 1.4.0\cr
+Version: \tab 1.4.1\cr
 Date: \tab 2014-03-28\cr
 License: \tab GPL-3\cr
 }
