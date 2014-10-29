@@ -646,7 +646,10 @@ plotCNProfile = function(rco, folder=NULL) {
 	if (length(segmLm) < min(minRegions, length(breaks)-1)) {
 		message("  Not enough segments, falling back to typical regression.")
 		flush.console()
-		ret[xy.a] = y.full / predict(classicLomo, data.frame(x=x.full))
+		if (resolution < 1)
+			ret[xy.a] = y / predict(classicLomo, data.frame(x=x))
+		else
+			ret[xy.a] = classic.rcount.prof
 		return(ret)
 	}
 	
