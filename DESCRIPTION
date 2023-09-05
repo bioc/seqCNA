@@ -1,7 +1,7 @@
 Package: seqCNA
 Type: Package
 Title: Copy number analysis of high-throughput sequencing cancer data
-Version: 1.47.0
+Version: 1.47.1
 Date: 2015-01-09
 Author: David Mosen-Ansorena
 Maintainer: David Mosen-Ansorena <dmosen.gn@cicbiogune.es>
@@ -14,3 +14,4 @@ Description: Copy number analysis of high-throughput sequencing cancer
 License: GPL-3
 SystemRequirements: samtools
 biocViews: CopyNumberVariation, Genetics, Sequencing
+PackageStatus: Deprecated
